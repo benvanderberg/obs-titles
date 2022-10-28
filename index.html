@@ -1,8 +1,181 @@
-<html>
-  <head>
-    <title>My Page</title>
-  </head>
-  <body>
-    <h1>My Page</h1>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.6.1.min.js"
+  integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+  crossorigin="anonymous"></script>
+  <script src="config.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">OBS Titles</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Persona Title</a></li>
+        <!-- <li><a href="#">About</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Contact</a></li> -->
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid text-center">  
+  <div class="jumbotron">
+    <h1>Persona Title - Lower Third</h1>
+  <p>Below is a generator to create a lower-third graphic for OBS which shows the persona in which you are presenting a demo. This is ideal if you are using OBS for recording or presenting a demo and need to show different personas.
+  </p>
+  <br>
+  </div>
+</div>
+<div class="container-fluid text-center">    
+  <div class="row content">
+    
+    <div class="col-sm-3 text-left"> 
+
+      <div class="well">
+        <form id="generator">
+          <h3>Step 1: Set Text</h3>
+          <p>Set the text for your graphic by choosing the persona image and setting the header and subhead text.</p>
+          <label for="Persona">Persona</label><br>
+          <input type="text" list="personas" id="personaField" placeholder="Persona Image" /><br><br>
+          <label for="header">Header</label>
+          <input class="form-control" type="text" name="header" class="fields" id="headerField"><br>
+          <label for="subhead">Subhead</label>
+          <input class="form-control" type="text" name="subhead" class="fields" id="subheadField">
+
+          
+<datalist id="personas">
+  <option value="buck">
+  <option value="carey">
+  <option value="connie">
+  <option value="fidel">
+    <option value="khalil">
+  <!-- ... -->
+</datalist>
+<br>
+          
+        </form>
+        <h3>Step 2: Copy Code</h3>
+        <p>Click the button below to copy the URL to your clipboard.</p>
+        <label for="">Copy text to clipboard</label>
+        <input class="form-control" type="text" name="outputUrl" id="outputURLField"><br>
+        <h3>Step 3: Add to OBS</h3>
+        <p>In OBS, create a Browser Source by doing the following:</p>
+        </p>
+        <ol>
+          <li>In the Source panel, click + and select Browser.</li>
+          <li>Name your Browser source and click OK.</li>
+          <li>Paste the URL into the URL field.</li>
+          <li>Set Width field to 800.</li>
+          <li>Set the Height field to 300.</li>
+          <li>Check <strong>Shutdown source when not visible.</strong>.</li>
+          <li>Check <strong>Refresh browser when scene becomes active.</strong></li>
+          <li>Click OK.</li>
+        </ol>
+        <script>
+          // $('#generator').submit((event) => {
+          //   event.preventDefault();
+
+          // });
+
+          $(document).ready(function() {
+
+            $("input").change(function() {
+              let personaName = $("#headerField").val();
+              let subheadName = $("#subheadField").val();
+              let persona = $('#personaField').val();
+              if(personaName == "") personaName="[Person Name]";
+              if(subheadName == "") subheadName="[Person Title]";
+              $('#outputURLField').val(`${config.url}?persona=${persona}&name=${personaName}&title=${subheadName}`);
+              console.log("personaName",personaName);
+              $("#previewFrame").attr('src', "templates/persona-lower-third.html?persona="+persona+"&name="+personaName+"&title="+subheadName)
+            })
+         });
+          
+        </script>
+      </div>
+      
+      </div>
+
+
+
+    <div class="col-sm-9" id="output">
+      <div class="well text-left">
+        
+        <h3>Preview</h3>
+        <div id="preview">
+          <iframe src="templates/persona-lower-third.html?persona=buck&name=[Person Name]&title=[Person Title]" id="previewFrame"></iframe>
+        </div>
+        
+      </div>
+    
+      
+
+
+    </div>
+    <div class="col-sm-12">
+      
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid text-center">
+  <p>Created by Ben Vanderberg</p>
+  <p>Follow <a href="https://twitter.com/benvanderberg">@benvanderberg</a> on Twitter.</p>
+</footer>
+
+</body>
 </html>

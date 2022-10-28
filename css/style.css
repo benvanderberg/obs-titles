@@ -1,0 +1,12 @@
+#preview {
+    background: url('../images/preview-bg.jpg');
+    background-size: 1100px 618px;
+    background-repeat: no-repeat;
+    height: 300px;
+}
+
+#previewFrame {
+    border: none;
+    width: 800px;
+    height: 300px;
+}
