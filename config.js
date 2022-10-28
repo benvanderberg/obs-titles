@@ -1,3 +1,3 @@
 var config = {
-    "url":"templates/persona-lower-third/persona-lower-third.html"
+    "url":"https://benvanderberg.github.io/obs-titles/"
 }
